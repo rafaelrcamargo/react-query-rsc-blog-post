@@ -1,13 +1,13 @@
 import { FC } from "react";
 import { TagsList } from "../components/TagsList";
+import { unstable_cache } from "next/cache";
+
+const query = unstable_cache(async () =>
+  (await fetch("http://localhost:3000/api/tags")).json()
+);
 
 export const Tags: FC<{}> = async () => {
-  const tagsResp = await fetch("http://localhost:3000/api/tags", {
-    next: {
-      tags: ["tags-query"],
-    },
-  });
-  const { tags } = await tagsResp.json();
+  const { tags } = await query();
 
   return (
     <div>

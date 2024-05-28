@@ -1,13 +1,13 @@
 import { FC } from "react";
 import { SubjectsList } from "../components/SubjectsList";
+import { unstable_cache } from "next/cache";
+
+const query = unstable_cache(async () =>
+  (await fetch("http://localhost:3000/api/subjects")).json()
+);
 
 export const Subjects: FC<{}> = async () => {
-  const subjectsResp = await fetch("http://localhost:3000/api/subjects", {
-    next: {
-      tags: ["subjects-query"],
-    },
-  });
-  const { subjects } = await subjectsResp.json();
+  const { subjects } = await query();
 
   return (
     <div>

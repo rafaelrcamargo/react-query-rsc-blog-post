@@ -13,7 +13,6 @@ export default function RSC(props: { searchParams: any }) {
   return (
     <section className="p-5">
       <h1 className="text-lg leading-none font-bold">Books page in RSC</h1>
-      <Suspense fallback={<h1>Loading...</h1>}>
         <div className="flex flex-col gap-2 p-5">
           <BookSearchForm />
           <div className="flex">
@@ -26,7 +25,6 @@ export default function RSC(props: { searchParams: any }) {
             </div>
           </div>
         </div>
-      </Suspense>
     </section>
   );
 }
